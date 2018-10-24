@@ -1,5 +1,5 @@
-const noteRoutes = require('./note_routes');
+const search = require('./search');
 
-module.exports = function(app, db) {
-  noteRoutes(app, db);
+module.exports = function(app) {
+  search.search(app);
 };
