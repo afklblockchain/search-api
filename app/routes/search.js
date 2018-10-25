@@ -5,13 +5,12 @@ module.exports = {
     app.post('/search', async (req, res) => {
       const query = { from: req.body.from, to: req.body.to, date: req.body.date, cabinClass: req.body.cabinClass, nbPax: req.body.nbPax };
 
-      //const airlinesList = await readApi.getAirlines();
-      const airlinesList = JSON.parse('[{ "address": "0xFE4D6C10F3B70f2586C41d16C862A19a89Cf8F03" }]');
+      const airlinesList = await readApi.getAirlines();
 
       var allOffers = [];
       var i;
-      for(i = 0; i < airlinesList.length; i++) {
-        allOffers.push(await readApi.getOffers(query.from, query.to, query.date, airlinesList[i].address));
+      for(i = 0; i < airlinesList.items.length; i++) {
+        allOffers.push(await readApi.getOffers(query.from, query.to, query.date, airlinesList.items[i].id));
       }
 
       res.send(allOffers);
