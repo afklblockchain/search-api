@@ -9,8 +9,8 @@ module.exports = {
 
       var allOffers = [];
       var i;
-      for(i = 0; i < airlinesList.items.length; i++) {
-        allOffers.push(await readApi.getOffers(query.from, query.to, query.date, airlinesList.items[i].id));
+      for (i = 0; i < airlinesList.items.length; i++) {
+        allOffers.push(...(await readApi.getOffers(query.from, query.to, query.date, airlinesList.items[i].id)));
       }
 
       res.send(allOffers);
