@@ -1,9 +1,10 @@
-var request = require('request');
+const request = require('request');
+const config = require('./config');
 
 module.exports = {
     getAirlines: async function () {
         return new Promise(function (resolve, reject) {
-            request.get("http://localhost:3000/airlines", (error, response, body) => {
+            request.get(`http://${config.app.host}:${config.app.port}/airlines`, (error, response, body) => {
             
                 if(error) {
                     reject(error);
@@ -16,7 +17,7 @@ module.exports = {
 
     getOffers: async function(from, to, date, address) {
         return new Promise(function (resolve, reject) {
-            request.get('http://localhost:3000/airlines/' +
+            request.get(`http://${config.app.host}:${config.app.port}/airlines/` +
                  address + '/flight-offers?destination=' +
                  from + '&origin=' +
                  to + '&date=' +
